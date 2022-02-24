@@ -88,15 +88,15 @@ namespace KCBVooma.Controllers
 
         [HttpPut]
         [Route("UpdateCard")]
-        public IActionResult Update()
+        public IActionResult Update(CreditCardModel data)
         {
             CommonResponse<int> commonResponse = new CommonResponse<int>();
             try
             {
-                commonResponse.status = _creditCardService.UpdateAccount(data).Result;
+                commonResponse.status = _creditCardService.UpdateCard(data).Result;
                 if (commonResponse.status > 0)
                 {
-                    commonResponse.message = Helper.accountUpdated;
+                    commonResponse.message = Helper.cardUpdated;
                     commonResponse.status = Helper.success_code;
                 }
             }
@@ -111,9 +111,25 @@ namespace KCBVooma.Controllers
 
         [HttpGet]
         [Route("DeleteCard")]
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            return Ok();
+            CommonResponse<int> commonResponse = new CommonResponse<int>();
+            try
+            {
+                commonResponse.status = _creditCardService.DeleteCard(id).Result;
+                if (commonResponse.status > 0)
+                {
+                    commonResponse.message = Helper.cardDeleted;
+                    commonResponse.status = Helper.success_code;
+                }
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+
+            return Ok(commonResponse);
         }
     }
 }
