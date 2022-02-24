@@ -1,4 +1,5 @@
 ﻿using KCBVooma.Models;
+using KCBVooma.Models.ViewModel;
 using KCBVooma.Services.CreditCard;
 using KCBVooma.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -88,7 +89,7 @@ namespace KCBVooma.Controllers
 
         [HttpPut]
         [Route("UpdateCard")]
-        public IActionResult Update(CreditCardModel data)
+        public IActionResult Update(CreditCardVM data)
         {
             CommonResponse<int> commonResponse = new CommonResponse<int>();
             try
@@ -136,7 +137,7 @@ namespace KCBVooma.Controllers
         [Route("GetAccountByCardID")]
         public IActionResult GetAccountByCardID(int id)
         {
-            CommonResponse<CreditCardModel> commonResponse = new CommonResponse<CreditCardModel>();
+            CommonResponse<AccountModel> commonResponse = new CommonResponse<AccountModel>();
             try
             {
                 commonResponse.dataenum = _creditCardService.GetAccByCardId(id);

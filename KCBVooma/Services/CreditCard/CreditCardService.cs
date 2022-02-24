@@ -1,4 +1,5 @@
 ﻿using KCBVooma.Models;
+using KCBVooma.Models.ViewModel;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,14 +65,12 @@ namespace KCBVooma.Services.CreditCard
             return cclist;
         }
 
-        public async Task<int> UpdateCard(CreditCardModel creditCard)
+        public async Task<int> UpdateCard(CreditCardVM creditCard)
         {
             var ccdata = _context.CreditCards.FirstOrDefault(x => x.Id == creditCard.Id);
             if (ccdata != null)
             {
-                ccdata.AccountId = creditCard.AccountId;
                 ccdata.CardAlias = creditCard.CardAlias;
-                ccdata.TypeOfCard = creditCard.TypeOfCard;
 
                 return await _context.SaveChangesAsync();
             }
