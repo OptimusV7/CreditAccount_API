@@ -8,6 +8,7 @@ namespace KCBVooma.Services.CreditCard
     {
         public List<CreditCardModel> GetCreditCardList();
         public CreditCardModel GetCardById(int Id);
+        public AccountModel GetAccByCardId(int Id);
         public Task<int> UpdateCard(CreditCardModel creditCard);
         public Task<int> DeleteCard(int Id);
         public Task<int> AddCard(CreditCardModel creditCard);

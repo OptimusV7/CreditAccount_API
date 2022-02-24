@@ -78,6 +78,12 @@ namespace KCBVooma.Services.CreditCard
             return 400;
         }
 
-        
+
+        public AccountModel GetAccByCardId(int AccountId)
+        {
+            return _context.Accounts.Where(x => x.Id == AccountId).ToList().SingleOrDefault();
+        }
+
+
     }
 }

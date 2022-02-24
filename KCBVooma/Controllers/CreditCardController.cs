@@ -131,5 +131,28 @@ namespace KCBVooma.Controllers
 
             return Ok(commonResponse);
         }
+
+        [HttpGet]
+        [Route("GetAccountByCardID")]
+        public IActionResult GetAccountByCardID(int id)
+        {
+            CommonResponse<CreditCardModel> commonResponse = new CommonResponse<CreditCardModel>();
+            try
+            {
+                commonResponse.dataenum = _creditCardService.GetAccByCardId(id);
+                if (commonResponse.status > 0)
+                {
+                    commonResponse.message = Helper.getCreditCardListById;
+                    commonResponse.status = Helper.success_code;
+                }
+            }
+            catch (Exception e)
+            {
+                commonResponse.message = e.Message;
+                commonResponse.status = Helper.failure_code;
+            }
+
+            return Ok(commonResponse);
+        }
     }
 }
